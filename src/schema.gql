@@ -1,0 +1,56 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Cat {
+  id: Int!
+  name: String!
+  post: [Post!]
+  title: String!
+}
+
+input CreateCatInput {
+  name: String!
+  title: String!
+}
+
+input CreatePostInput {
+  authorId: Int!
+  content: String!
+}
+
+type Mutation {
+  createCat(createCatInput: CreateCatInput!): Cat!
+  createPost(createPostInput: CreatePostInput!): Post!
+  removeCat(id: Int!): Cat!
+  removePost(id: Int!): Post!
+  updateCat(updateCatInput: UpdateCatInput!): Cat!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+}
+
+type Post {
+  author: Cat!
+  authorId: Int!
+  content: String!
+  id: Int!
+}
+
+type Query {
+  cat(id: Int!): Cat!
+  cats: [Cat!]!
+  post(id: Int!): Post!
+  postofCat(authorId: Int!): [Post!]!
+  posts: [Post!]!
+}
+
+input UpdateCatInput {
+  id: Int!
+  name: String
+  title: String
+}
+
+input UpdatePostInput {
+  authorId: Int
+  content: String
+  id: Int!
+}
