@@ -5,7 +5,7 @@
 type Cat {
   id: Int!
   name: String!
-  post: [Post!]
+  post: [Post]!
   title: String!
 }
 

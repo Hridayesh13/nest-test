@@ -12,7 +12,7 @@ export class CatsService {
   }
 
   findAll() {
-    return this.prisma.cat.findMany;
+    return this.prisma.cat.findMany();
   }
 
   findOne(id: number) {

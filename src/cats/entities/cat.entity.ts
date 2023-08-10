@@ -12,6 +12,6 @@ export class Cat {
   @Field(() => String)
   title: string;
 
-  @Field(() => [Post], { nullable: true })
+  @Field(() => [Post], { nullable: 'items' })
   post?: [Post] | null;
 }

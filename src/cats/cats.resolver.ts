@@ -3,7 +3,6 @@ import { CatsService } from './cats.service';
 import { Cat } from './entities/cat.entity';
 import { CreateCatInput } from './dto/create-cat.input';
 import { UpdateCatInput } from './dto/update-cat.input';
-import { PrismaService } from 'nestjs-prisma';
 
 @Resolver(() => Cat)
 export class CatsResolver {

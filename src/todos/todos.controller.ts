@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TodoDocument } from './documents/todos.document';
 import { TodosService } from './todos.service';
-import { Args } from '@nestjs/graphql';
 import { CreateTodoDto } from './dto/create-todo.dto';
 
 @Controller('todos')
