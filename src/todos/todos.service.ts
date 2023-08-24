@@ -1,6 +1,10 @@
 import { Injectable, Inject } from '@nestjs/common';
 import * as dayjs from 'dayjs';
-import { CollectionReference, Timestamp } from '@google-cloud/firestore';
+import {
+  CollectionReference,
+  Firestore,
+  Timestamp,
+} from '@google-cloud/firestore';
 import { TodoDocument } from './documents/todos.document';
 import { CreateTodoDto } from './dto/create-todo.dto';
 
@@ -9,6 +13,7 @@ export class TodosService {
   constructor(
     @Inject(TodoDocument.collectionName)
     private todosCollection: CollectionReference<TodoDocument>,
+    private readonly firestore: Firestore, // Inject Firestore
   ) {}
 
   async createTodo(createTodoDto: CreateTodoDto): Promise<TodoDocument> {
