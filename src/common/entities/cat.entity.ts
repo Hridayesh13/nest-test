@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
-import { Post } from 'src/posts/entities/post.entity';
+import { Post } from 'src/common/entities/post.entity';
 
 @ObjectType()
 export class Cat {

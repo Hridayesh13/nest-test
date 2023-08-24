@@ -1,19 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TodosController } from './todos.controller';
 import { TodosService } from './todos.service';
+import { CollectionReference, Firestore } from '@google-cloud/firestore';
+import { TodoDocument } from './documents/todos.document';
 
 describe('TodosController', () => {
   let todosController: TodosController;
   let todosService: TodosService;
+  let todosCollection: CollectionReference<TodoDocument>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const moduleRef = await Test.createTestingModule({
       controllers: [TodosController],
       providers: [TodosService],
     }).compile();
 
-    todosService = module.get<TodosService>(TodosService);
-    todosController = module.get<TodosController>(TodosController);
+    todosService = moduleRef.get<TodosService>(TodosService);
+    todosController = moduleRef.get<TodosController>(TodosController);
   });
 
   describe('findAll', () => {

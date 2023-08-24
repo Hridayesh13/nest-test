@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from 'nestjs-prisma';
@@ -6,11 +6,13 @@ import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { FirebaseModule } from 'nestjs-firebase';
 
 import { CatsModule } from './cats/cats.module';
 import { PostsModule } from './posts/posts.module';
 import { FirestoreModule } from './firestore/firestore.module';
 import { TodosModule } from './todos/todos.module';
+import { UserAuthMiddleware } from './common/middleware/user-auth.middleware';
 
 @Module({
   imports: [
@@ -30,6 +32,10 @@ import { TodosModule } from './todos/todos.module';
       }),
       inject: [ConfigService],
     }),
+    // FirebaseModule.forRoot({
+    //   googleApplicationCredential: process.env.SA_KEY,
+    // }),
+
     CatsModule,
     PostsModule,
     TodosModule,
@@ -37,4 +43,11 @@ import { TodosModule } from './todos/todos.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(UserAuthMiddleware).forRoutes({
+      path: '/hello',
+      method: RequestMethod.ALL,
+    });
+  }
+}
