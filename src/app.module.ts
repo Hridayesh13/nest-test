@@ -33,9 +33,9 @@ import { StripeModule } from './stripe/stripe.module';
       }),
       inject: [ConfigService],
     }),
-    // FirebaseModule.forRoot({
-    //   googleApplicationCredential: process.env.SA_KEY,
-    // }),
+    FirebaseModule.forRoot({
+      googleApplicationCredential: process.env.SA_KEY,
+    }),
     StripeModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         apiKey: configService.get<string>('STRIPE_API_KEY'),

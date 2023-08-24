@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -12,7 +12,7 @@ export class AppController {
 
   @Get('/hello')
   getHello(@Req() request: Request): string {
-    return 'Hello ' + request['user']?.email + '!';
+    return this.appService.getHello(request['user']?.email);
   }
 
   @Get('/token')
