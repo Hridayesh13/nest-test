@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
+import { StripeService } from './stripe/stripe.service';
 
 @Injectable()
 export class AppService {
+  constructor(private readonly stripeService: StripeService) {}
+
   // getHello(): string {
   //   return 'Hello World!';
   // }
@@ -24,5 +27,9 @@ export class AppService {
       .catch((error) => {
         console.error('Error creating custom token:', error);
       });
+  }
+
+  getCustomers() {
+    return this.stripeService.stripe.customers.list();
   }
 }

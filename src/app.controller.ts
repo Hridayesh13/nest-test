@@ -19,4 +19,9 @@ export class AppController {
   getToken() {
     return this.appService.getToken();
   }
+
+  @Get('/customers')
+  getCustomers() {
+    return this.appService.getCustomers();
+  }
 }

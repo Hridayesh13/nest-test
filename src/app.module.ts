@@ -13,6 +13,7 @@ import { PostsModule } from './posts/posts.module';
 import { FirestoreModule } from './firestore/firestore.module';
 import { TodosModule } from './todos/todos.module';
 import { UserAuthMiddleware } from './common/middleware/user-auth.middleware';
+import { StripeModule } from './stripe/stripe.module';
 
 @Module({
   imports: [
@@ -35,6 +36,15 @@ import { UserAuthMiddleware } from './common/middleware/user-auth.middleware';
     // FirebaseModule.forRoot({
     //   googleApplicationCredential: process.env.SA_KEY,
     // }),
+    StripeModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        apiKey: configService.get<string>('STRIPE_API_KEY'),
+        options: {
+          apiVersion: '2023-08-16',
+        },
+      }),
+      inject: [ConfigService],
+    }),
 
     CatsModule,
     PostsModule,
